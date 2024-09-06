@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Container } from "@mui/material";
 import {
   Card,
@@ -13,6 +14,9 @@ import PauseIcon from "@mui/icons-material/Pause";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
 function App() {
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+
   return (
     <Container
       sx={{
@@ -22,33 +26,49 @@ function App() {
         height: `100vh`,
       }}
     >
-      <Card>
-        <CardContent sx={{ p: 4 }}>
-          <Typography sx={{ textAlign: `center` }}>タイマーアプリ</Typography>
-          <Box>
+      <Card sx={{ maxWidth: `375px`, width: `90%` }}>
+        <CardContent sx={{ p: 2 }}>
+          <Typography variant="h4" component="h1" align="center">
+            タイマーアプリ
+          </Typography>
+          <Box
+            sx={{
+              display: `flex`,
+              justifyContent: `space-between`,
+              mt: 2,
+            }}
+          >
             <TextField
               id="outlined-number"
               label="分"
               type="number"
+              value={minutes}
+              InputProps={{ inputProps: { min: 0 } }}
               slotProps={{
                 inputLabel: {
                   shrink: true,
                 },
               }}
+              sx={{ maxWidth: `130px`, width: `45%` }}
             />
             <TextField
               id="outlined-number"
               label="秒"
               type="number"
+              value={seconds}
+              InputProps={{ inputProps: { min: 0, max: 59 } }}
               slotProps={{
                 inputLabel: {
                   shrink: true,
                 },
               }}
+              sx={{ maxWidth: `130px`, width: `45%` }}
             />
           </Box>
 
-          <Typography sx={{ textAlign: `center` }}>00:00</Typography>
+          <Typography variant="h4" align="center" mt={2}>
+            00:00
+          </Typography>
 
           <Box sx={{ display: `flex`, justifyContent: `center` }}>
             <IconButton color="primary" size="large" aria-label="スタート">
