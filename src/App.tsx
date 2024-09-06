@@ -3,7 +3,6 @@ import { Container } from "@mui/material";
 import {
   Card,
   CardContent,
-  Button,
   IconButton,
   Box,
   Typography,
@@ -16,6 +15,13 @@ import RestartAltIcon from "@mui/icons-material/RestartAlt";
 function App() {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+
+  const startTimer = () => {
+    if (minutes > 0 || seconds > 0) {
+      setIsRunning(true);
+    }
+  };
 
   return (
     <Container
@@ -49,7 +55,8 @@ function App() {
                   shrink: true,
                 },
               }}
-              sx={{ maxWidth: `130px`, width: `45%` }}
+              onChange={(e) => setMinutes(parseInt(e.target.value) || 0)}
+              sx={{ maxWidth: `200px`, width: `45%` }}
             />
             <TextField
               id="outlined-number"
@@ -62,16 +69,23 @@ function App() {
                   shrink: true,
                 },
               }}
-              sx={{ maxWidth: `130px`, width: `45%` }}
+              onChange={(e) => setSeconds(parseInt(e.target.value) || 0)}
+              sx={{ maxWidth: `200px`, width: `45%` }}
             />
           </Box>
 
           <Typography variant="h4" align="center" mt={2}>
-            00:00
+            {`${minutes}:${seconds}`}
           </Typography>
 
           <Box sx={{ display: `flex`, justifyContent: `center` }}>
-            <IconButton color="primary" size="large" aria-label="スタート">
+            <IconButton
+              onClick={startTimer}
+              disabled={isRunning}
+              color="primary"
+              size="large"
+              aria-label="スタート"
+            >
               <PlayArrowIcon fontSize="large" />
             </IconButton>
             <IconButton color="secondary" size="large" aria-label="一時停止">
