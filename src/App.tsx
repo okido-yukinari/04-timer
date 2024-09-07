@@ -83,31 +83,25 @@ function App() {
             }}
           >
             <TextField
+              fullWidth
               id="outlined-number"
               label="分"
               type="number"
               value={minutes}
               InputProps={{ inputProps: { min: 0 } }}
-              slotProps={{
-                inputLabel: {
-                  shrink: true,
-                },
-              }}
               onChange={(e) => setMinutes(parseInt(e.target.value) || 0)}
+              disabled={isRunning}
               sx={{ maxWidth: `200px`, width: `45%` }}
             />
             <TextField
+              fullWidth
               id="outlined-number"
               label="秒"
               type="number"
               value={seconds}
               InputProps={{ inputProps: { min: 0, max: 59 } }}
-              slotProps={{
-                inputLabel: {
-                  shrink: true,
-                },
-              }}
               onChange={(e) => setSeconds(parseInt(e.target.value) || 0)}
+              disabled={isRunning}
               sx={{ maxWidth: `200px`, width: `45%` }}
             />
           </Box>
