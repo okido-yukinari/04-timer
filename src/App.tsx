@@ -90,7 +90,7 @@ function App() {
               value={minutes}
               InputProps={{ inputProps: { min: 0 } }}
               onChange={(e) => setMinutes(parseInt(e.target.value) || 0)}
-              disabled={isRunning}
+              aria-disabled={isRunning}
               sx={{ maxWidth: `200px`, width: `45%` }}
             />
             <TextField
@@ -101,7 +101,7 @@ function App() {
               value={seconds}
               InputProps={{ inputProps: { min: 0, max: 59 } }}
               onChange={(e) => setSeconds(parseInt(e.target.value) || 0)}
-              disabled={isRunning}
+              aria-disabled={isRunning}
               sx={{ maxWidth: `200px`, width: `45%` }}
             />
           </Box>
@@ -113,7 +113,7 @@ function App() {
           <Box sx={{ display: `flex`, justifyContent: `center` }}>
             <IconButton
               onClick={startTimer}
-              disabled={isRunning}
+              aria-disabled={isRunning}
               color="primary"
               size="large"
               aria-label="スタート"
@@ -122,7 +122,7 @@ function App() {
             </IconButton>
             <IconButton
               onClick={stopTimer}
-              disabled={!isRunning}
+              aria-disabled={!isRunning}
               color="secondary"
               size="large"
               aria-label="一時停止"
