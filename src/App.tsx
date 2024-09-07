@@ -48,6 +48,7 @@ function App() {
   const resetTimer = () => {
     setMinutes(0);
     setSeconds(0);
+    setTime(0);
     setIsRunning(false);
   };
 
@@ -55,7 +56,9 @@ function App() {
     const mins = Math.floor(time / 60);
     const secs = time % 60;
 
-    return `${mins}：${secs}`;
+    return `${mins.toString().padStart(2, "0")}:${secs
+      .toString()
+      .padStart(2, "0")}`;
   };
 
   return (
