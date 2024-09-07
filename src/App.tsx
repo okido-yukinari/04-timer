@@ -23,6 +23,23 @@ function App() {
     }
   };
 
+  const stopTimer = () => {
+    setIsRunning(false);
+  };
+
+  const resetTimer = () => {
+    setMinutes(0);
+    setSeconds(0);
+    setIsRunning(false);
+  };
+
+  const formatTime = (time: number) => {
+    const mins = Math.floor(time / 60);
+    const secs = time % 60;
+
+    return `${mins}：${secs}`;
+  };
+
   return (
     <Container
       sx={{
@@ -75,7 +92,7 @@ function App() {
           </Box>
 
           <Typography variant="h4" align="center" mt={2}>
-            {`${minutes}:${seconds}`}
+            {/* {formatTime(timeLeft)} */}
           </Typography>
 
           <Box sx={{ display: `flex`, justifyContent: `center` }}>
@@ -88,10 +105,21 @@ function App() {
             >
               <PlayArrowIcon fontSize="large" />
             </IconButton>
-            <IconButton color="secondary" size="large" aria-label="一時停止">
+            <IconButton
+              onClick={stopTimer}
+              disabled={!isRunning}
+              color="secondary"
+              size="large"
+              aria-label="一時停止"
+            >
               <PauseIcon fontSize="large" />
             </IconButton>
-            <IconButton color="error" size="large" aria-label="リセット">
+            <IconButton
+              onClick={resetTimer}
+              color="error"
+              size="large"
+              aria-label="リセット"
+            >
               <RestartAltIcon fontSize="large" />
             </IconButton>
           </Box>
