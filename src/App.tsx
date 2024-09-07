@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container } from "@mui/material";
 import {
   Card,
@@ -16,9 +16,27 @@ function App() {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
+  const [time, setTime] = useState(0);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+    if (isRunning && time > 0) {
+      interval = setInterval(() => {
+        setTime((prevTime) => prevTime - 1);
+      }, 1000);
+    } else if (time === 0) {
+      setIsRunning(false);
+    }
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [isRunning, time]);
 
   const startTimer = () => {
     if (minutes > 0 || seconds > 0) {
+      setTime(minutes * 60 + seconds);
       setIsRunning(true);
     }
   };
@@ -92,7 +110,7 @@ function App() {
           </Box>
 
           <Typography variant="h4" align="center" mt={2}>
-            {/* {formatTime(timeLeft)} */}
+            {formatTime(time)}
           </Typography>
 
           <Box sx={{ display: `flex`, justifyContent: `center` }}>
